@@ -5,7 +5,7 @@ import Header from './Header';
 import ItemList from './ItemList';
 import NewItem from './NewItem';
 
-export default class Container extends Component {
+export default class AppContainer extends Component {
   render() {
     return (
         <Switch>

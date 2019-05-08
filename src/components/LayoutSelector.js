@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Button, Icon } from 'semantic-ui-react';
 
 export default class LayoutSelector extends Component {
   render() {
@@ -6,12 +7,12 @@ export default class LayoutSelector extends Component {
     const currentLayout = this.props.current;
     return (
       <div className="ui secondary menu">
-        <a className={ currentLayout === 'grid' ? 'item active' : 'item'} onClick={() => { clickEvent('grid') }}>
-            <i className="icon grid layout"></i>
-        </a>
-        <a className={ currentLayout === 'table' ? 'item active' : 'item'} onClick={() => { clickEvent('table') }}>
-            <i className="icon table"></i>
-        </a>
+        <Button icon className={ currentLayout === 'grid' ? 'item active' : 'item'} onClick={() => { clickEvent('grid') }}>
+            <Icon name="grid layout" />
+        </Button>
+        <Button icon className={ currentLayout === 'table' ? 'item active' : 'item'} onClick={() => { clickEvent('table') }}>
+            <Icon name="table" />
+        </Button>
       </div>
     )
   }

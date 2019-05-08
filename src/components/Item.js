@@ -1,26 +1,37 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Card, Image, Icon, Button, Placeholder } from 'semantic-ui-react';
 
 export default class Item extends Component {
     render() {
         const {name, username, email, website} = this.props.item;
+        const {loading} = this.props;
         const imgSrc = `https://via.placeholder.com/300/0000FF/808080?text=${username}`;
         return (
-            <div className="four wide doubling column">
-                <div className="ui card">
-                    <img src={imgSrc} className="ui image" />
-                    <div className="content">
-                        <div className="header">{name}</div>
-                        <div className="meta">{email}</div>
-                        <div className="description">{website}</div>
-                    </div>
-                    <div className="extra content">
-                        <a className="item button">
-                            <i className="delete icon"></i>
-                        </a>
-                        <a><i aria-hidden="true" className="user icon"></i>16 Friends</a>
-                    </div>
-                </div>
-            </div>
+                <Card>
+                    {loading ? (
+                        <Placeholder>
+                            <Placeholder.Image square />
+                        </Placeholder>
+                    ) : (
+                        <Image src={imgSrc} wrapped />
+                    )}
+                    <Card.Content> 
+                        <Card.Header>{name}</Card.Header>
+                        <Card.Meta>{email}</Card.Meta>
+                        <Card.Description>{website}</Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <Button icon>
+                            <Icon name="delete" />
+                        </Button>
+                        <Button icon>
+                            <Icon name="search" />
+                        </Button>
+                        <Button icon>
+                            <Icon name="edit" />
+                        </Button>
+                    </Card.Content>
+                </Card>
         )
     }
 }

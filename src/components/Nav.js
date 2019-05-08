@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Icon, Menu } from 'semantic-ui-react';
 
 export default class Nav extends Component {
   render() {
     return (
-      <nav className="ui pointing tabular menu">
+      <Menu secondary>
         <Link to="/">
-            <a className="item">
-                <i aria-hidden="true" className="home icon"></i>
-            </a>
+          <Menu.Item header>
+            <Icon name="home" />
+            Home
+          </Menu.Item>
         </Link>
         <Link to="/list">
-            <a className="item">Inicio</a>
-        </Link>
-        <Link to="/list">
-            <a className="item">Lista</a>
+          <Menu.Item header>
+            List
+          </Menu.Item>
         </Link>
         <Link to="/new">
-            <a className="item">Nuevo</a>
+          <Menu.Item header>
+            New
+          </Menu.Item>
         </Link>
-      </nav>
+      </Menu>
     )
   }
 }

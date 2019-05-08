@@ -1,21 +1,26 @@
 
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import logo from './logo.svg';
+import { Container, Divider } from 'semantic-ui-react';
 import './App.css';
-import Header from './components/Header';
 
 import Nav from './components/Nav';
-import Container from './components/Container';
+import AppContainer from './components/Container';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="App" className="ui container">
-      <Router>
-        <Nav />
-        <Container />
-      </Router>
-    </div>
+    <React.Fragment>
+
+      <Container className="App">
+        <Router>
+          <Nav />
+          <Divider />
+          <AppContainer />
+        </Router>
+      </Container>
+      <Footer></Footer>
+    </React.Fragment>
   );
 }
 

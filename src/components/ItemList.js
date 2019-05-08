@@ -3,24 +3,23 @@ import axios from 'axios';
 import Item from './Item';
 import ItemTable from './ItemTable';
 import LayoutSelector from './LayoutSelector';
-import { Table, Header } from 'semantic-ui-react';
+import { Table, Card } from 'semantic-ui-react';
 
 export default class ItemList extends React.Component {
     state = {
-        items: [],
+        items: [{id:1},{id:2},{id:3},{id:4}],
         layout: 'grid',
+        loading: true,
     }
 
     componentDidMount() {
         axios.get(`https://jsonplaceholder.typicode.com/users`)
             .then(res => {
-                this.setState({items: res.data});
-                console.log(res);
-            })
+                this.setState({items: res.data, loading: false});
+            });
     }
 
     clickEvent = (string) => {
-        console.log(string);
         this.setState({layout: string});
     }
 
@@ -30,13 +29,13 @@ export default class ItemList extends React.Component {
         let layout;
         if(this.state.layout === 'grid') {
             layout = (
-                <div className="ui grid">
-                    {this.state.items.map(i => <Item key={i.id} item={i}></Item>)}
-                </div>
+                <Card.Group doubling itemsPerRow={4} stackable>
+                    {this.state.items.map(i => <Item key={i.id} item={i} loading={this.state.loading}></Item>)}
+                </Card.Group>
             );
         } else if (this.state.layout === 'table') {
             layout = (
-                <Table basic='very' celled collapsing>
+                <Table celled>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Photo</Table.HeaderCell>

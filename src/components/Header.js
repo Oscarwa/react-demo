@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Header, Image, Container } from 'semantic-ui-react';
+import logo from '../logo.svg';
 
-export default class Header extends Component {
+export default class AppHeader extends Component {
   static propTypes = {
     title: PropTypes.string,
   }
   
   static defaultProps = {
-    title: "Title",
+    title: "React Demo App",
   }
 
   state = {
@@ -16,12 +18,11 @@ export default class Header extends Component {
 
   render() {
     const { title } = this.props;
-    const { count } = this.state;
     return (
-      <React.Fragment>
-        <h1>{title}</h1>
-        <h2>{count}</h2>
-      </React.Fragment>
+      <Container>
+        <Header as="h1">{title}</Header>
+        <Image src={logo} size="small" centered ></Image>
+      </Container>
     );
   }
 }
