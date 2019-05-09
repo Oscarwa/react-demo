@@ -16,18 +16,30 @@ export default class Item extends Component {
                         <Image src={imgSrc} wrapped />
                     )}
                     <Card.Content> 
-                        <Card.Header>{name}</Card.Header>
-                        <Card.Meta>{email}</Card.Meta>
-                        <Card.Description>{website}</Card.Description>
+                        {loading ? (
+                            <Placeholder>
+                                <Placeholder.Header>
+                                    <Placeholder.Line />
+                                    <Placeholder.Line length='medium' />
+                                    <Placeholder.Line length='short' />
+                                </Placeholder.Header>
+                            </Placeholder>
+                        ) : (
+                            <React.Fragment>
+                                <Card.Header>{name}</Card.Header>
+                                <Card.Meta>{email}</Card.Meta>
+                                <Card.Description>{website}</Card.Description>
+                            </React.Fragment>
+                        )}
                     </Card.Content>
                     <Card.Content extra>
-                        <Button icon>
+                        <Button icon disabled={loading}>
                             <Icon name="delete" />
                         </Button>
-                        <Button icon>
+                        <Button icon disabled={loading}>
                             <Icon name="search" />
                         </Button>
-                        <Button icon>
+                        <Button icon disabled={loading}>
                             <Icon name="edit" />
                         </Button>
                     </Card.Content>
