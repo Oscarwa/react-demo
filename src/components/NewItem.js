@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Form, Header, Grid, Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import Axios from 'axios';
 
-export default class NewItem extends Component {
+class NewItem extends Component {
 
   state = {
     name: '',
@@ -87,3 +88,5 @@ export default class NewItem extends Component {
     )
   }
 }
+
+export default connect(null, null)(NewItem)

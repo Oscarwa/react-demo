@@ -1,34 +1,36 @@
 import { actionTypes } from '../actions'
 
 const InitialState = {
-    items: [],
+    users: [{},{},{},{}],
+    loading: true,
+    layout: 'grid'
 }
 
 export const mainReducer = (state = InitialState, action) => {
     switch (action.type) {
-        case actionTypes.GET_ITEMS:
+        case actionTypes.GET_USERS:
             return {
                 ...state, 
-                items: action.payload.data,
+                users: action.payload.data.data,
                 loading: false,
             }
-        case actionTypes.POST_ITEM:{
-            let newData = state.items.slice();
+        case actionTypes.POST_USER:{
+            let newData = state.users.slice();
             newData.push(action.payload.data.data);
             return {
-                ...state, items: newData    
+                ...state, users: newData    
             }
         }
-        case actionTypes.DELETE_ITEM:{
+        case actionTypes.DELETE_USER:{
             return {
-                ...state, items: state.items.filter(us=>{
+                ...state, users: state.users.filter(us=>{
                     return parseInt(us.id) !== parseInt(action.payload)
                 })
             }
         }
-        case actionTypes.UPDATE_ITEM: {
+        case actionTypes.UPDATE_USER: {
             return {
-                ...state, items: state.items.map((value) => {
+                ...state, users: state.users.map((value) => {
                     if(value.id === action.payload.id)
                         return action.payload;
 

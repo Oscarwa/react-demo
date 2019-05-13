@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Image, Icon, Button, Placeholder } from 'semantic-ui-react';
 
-export default class Item extends Component {
+import { uiConfirmOpen } from '../actions/actionUI'
+
+class Item extends Component {
+
+    deleteUserHandler = () => {
+        this.props.uiConfirmOpen(this.props.item)
+        //this.props.deleteUser(this.props.item.id)
+    }
+
     render() {
-        const {name, username, email, website} = this.props.item;
+        const {name, img, age, role} = this.props.item;
         const {loading} = this.props;
-        const imgSrc = `https://via.placeholder.com/300/0000FF/808080?text=${username}`;
         return (
                 <Card>
                     {loading ? (
@@ -13,7 +21,7 @@ export default class Item extends Component {
                             <Placeholder.Image square />
                         </Placeholder>
                     ) : (
-                        <Image src={imgSrc} wrapped />
+                        <Image src={img} wrapped />
                     )}
                     <Card.Content> 
                         {loading ? (
@@ -27,17 +35,14 @@ export default class Item extends Component {
                         ) : (
                             <React.Fragment>
                                 <Card.Header>{name}</Card.Header>
-                                <Card.Meta>{email}</Card.Meta>
-                                <Card.Description>{website}</Card.Description>
+                                <Card.Meta>Age: {age}</Card.Meta>
+                                <Card.Description>{role}</Card.Description>
                             </React.Fragment>
                         )}
                     </Card.Content>
                     <Card.Content extra>
-                        <Button icon disabled={loading}>
+                        <Button icon disabled={loading} onClick={this.deleteUserHandler}>
                             <Icon name="delete" />
-                        </Button>
-                        <Button icon disabled={loading}>
-                            <Icon name="search" />
                         </Button>
                         <Button icon disabled={loading}>
                             <Icon name="edit" />
@@ -47,3 +52,13 @@ export default class Item extends Component {
         )
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        uiConfirmOpen: (item) => {
+            dispatch(uiConfirmOpen(item))
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Item)
