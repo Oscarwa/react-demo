@@ -14,11 +14,22 @@ export function getUsers() {
 }
 export function postUser(user) {
     return dispatch => {
-        API.post('/users', user)
+        return API.post('/users', user)
             .then(res => {
                 dispatch({
                     type: actionTypes.POST_USER,
                     payload: res
+                })
+            })
+    }
+}
+export function updateUser(user) {
+    return dispatch => {
+        return API.put('/users', user)
+            .then(res => {
+                dispatch({
+                    type: actionTypes.UPDATE_USER,
+                    payload: user
                 })
             })
     }

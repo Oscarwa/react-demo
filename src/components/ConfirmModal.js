@@ -33,13 +33,14 @@ class ConfirmModal extends Component {
                 open={this.props.open}
                 content={this.props.message}
                 onCancel={this.handleCancel}
-                onConfirm={this.handleConfirm} />
+                onConfirm={this.handleConfirm}
+                size="small" />
         )
     }
 }
 
 const mapStateToProps = state => ({
-    open: state.uiReducer.open,
+    open: state.uiReducer.openConfirm,
     user: state.uiReducer.user,
     message: state.uiReducer.message,
   })

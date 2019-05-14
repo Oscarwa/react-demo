@@ -5,7 +5,7 @@ import logo from '../logo.svg';
 export default class Footer extends Component {
   render() {
     return (
-        <Segment inverted style={{ margin: '5em 0em 0em', position: 'absolute', right: '0', bottom: '0', left: '0' }} vertical>
+        <Segment inverted style={{ margin: '2em 0em 0em', position: 'absolute', right: '0', bottom: '0', left: '0' }} vertical>
         <Container textAlign='center'>
           <Image src={logo} centered size='mini' />
           <List horizontal inverted divided link size='small'>

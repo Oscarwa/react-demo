@@ -14,6 +14,7 @@ function App() {
 
       <Container className="App">
         <Router>
+          <Divider />
           <Nav />
           <Divider />
           <AppContainer />

@@ -25,10 +25,14 @@ import { getUsers } from '../actions/actionCreators';
 
 	static defaultProps = {
 		users: []
-	}
+  }
+  
+  refreshUsers = () => {
+    this.props.getUsers();
+  }
 
   componentDidMount() {
-    this.props.getUsers();
+    this.refreshUsers();
   }
 
   render() {
@@ -36,7 +40,7 @@ import { getUsers } from '../actions/actionCreators';
       <div>
         <Switch>
           <Route exact path="/home" component={Header}/>
-          <Route exact path="/users" render={() => <ItemList users={this.props.users} loading={this.props.loading} layout={this.state.layout} layoutHandler={this.layoutHandler} />}/>
+          <Route exact path="/users" render={() => <ItemList users={this.props.users} loading={this.props.loading} refresh={this.refreshUsers} layout={this.state.layout} layoutHandler={this.layoutHandler} />}/>
           <Route path="/create" component={NewItem}/>
           <Route path="/404" component={p404}/>
 

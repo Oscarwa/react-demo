@@ -12,10 +12,6 @@ export default class AppHeader extends Component {
     title: "React Demo App",
   }
 
-  state = {
-    count: 0,
-  }
-
   render() {
     const { title } = this.props;
     return (

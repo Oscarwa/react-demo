@@ -5,6 +5,7 @@ const actionTypes = {
     UPDATE_USER:'UPDATE_USER',
 
     UI_CONFIRM_STATE: 'UI_CONFIRM_STATE',
+    UI_MODAL_STATE: 'UI_MODAL_STATE',
 }
 
 export { actionTypes }

@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Card, Image, Icon, Button, Placeholder } from 'semantic-ui-react';
+import { Card, Image, Placeholder } from 'semantic-ui-react';
 
+import ItemActions from './ItemActions';
 import { uiConfirmOpen } from '../actions/actionUI'
 
-class Item extends Component {
+class ItemCard extends Component {
 
     static propTypes = {
         uiConfirmOpen: PropTypes.func,
     }
 
     deleteUserHandler = () => {
-        this.props.uiConfirmOpen(this.props.item)
+        this.props.uiConfirmOpen(this.props.user)
     }
 
     render() {
-        const {name, img, age, role} = this.props.item;
+        const {name, img, age, role} = this.props.user;
         const {loading} = this.props;
         return (
                 <Card>
@@ -45,12 +46,7 @@ class Item extends Component {
                         )}
                     </Card.Content>
                     <Card.Content extra>
-                        <Button icon disabled={loading} onClick={this.deleteUserHandler}>
-                            <Icon name="delete" />
-                        </Button>
-                        <Button icon disabled={loading}>
-                            <Icon name="edit" />
-                        </Button>
+                        <ItemActions user={this.props.user} loading={loading} />
                     </Card.Content>
                 </Card>
         )
@@ -59,10 +55,10 @@ class Item extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        uiConfirmOpen: (item) => {
-            dispatch(uiConfirmOpen(item))
+        uiConfirmOpen: (user) => {
+            dispatch(uiConfirmOpen(user))
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(Item)
+export default connect(null, mapDispatchToProps)(ItemCard)

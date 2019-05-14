@@ -12,3 +12,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.ui.card .ui.image {
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.ui.card .ui.image img {
+  max-width: none;
+  width: auto !important;
+  max-height: 200px;
+  margin: 0 auto;
+}

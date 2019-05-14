@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Table, Header, Image, Button, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import { Table, Header, Image } from 'semantic-ui-react';
 
-import { uiConfirmOpen } from '../actions/actionUI'
+import ItemActions from './ItemActions';
 
 class ItemTable extends Component {
 
-    static propTypes = {
-        uiConfirmOpen: PropTypes.func,
-    }
-
-    deleteUserHandler = () => {
-        this.props.uiConfirmOpen(this.props.item)
-    }
-
     render() {
-        const { name, img, age, role } = this.props.item;
+        const { name, img, age, role } = this.props.user;
         return (
             <Table.Row>
                 <Table.Cell>
@@ -28,24 +18,11 @@ class ItemTable extends Component {
                 <Table.Cell>{age}</Table.Cell>
                 <Table.Cell>{role}</Table.Cell>
                 <Table.Cell>
-                    <Button icon onClick={this.deleteUserHandler}>
-                        <Icon name="delete"  />
-                    </Button>
-                    <Button icon>
-                        <Icon name="edit" />
-                    </Button>
+                    <ItemActions user={this.props.user} loading={this.props.loading} />
                 </Table.Cell>
             </Table.Row>
         )
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        uiConfirmOpen: (item) => {
-            dispatch(uiConfirmOpen(item))
-        }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(ItemTable)
+export default ItemTable
