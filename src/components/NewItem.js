@@ -41,14 +41,10 @@ class NewItem extends Component {
         if(this.state.update) {
           user.id = this.state.id;
           this.props.updateUser(user);
-          // setTimeout(() => {
-            this.props.uiModalClose();
-          // }, 200);
+          this.props.uiModalClose();
         } else {
           this.props.postUser(user);
-          // setTimeout(() => {
-            this.props.history.push('/users');
-          // }, 200);
+          this.props.history.push('/users');
       }
     }
   }
