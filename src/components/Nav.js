@@ -6,7 +6,7 @@ export default class Nav extends Component {
   render() {
     return (
       <Menu secondary>
-        <Link to="/">
+        <Link to="/home">
           <Menu.Item header>
             <Icon name="home" />
             Home

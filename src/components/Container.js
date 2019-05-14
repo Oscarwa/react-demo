@@ -41,10 +41,9 @@ import { getUsers } from '../actions/actionCreators';
         <Switch>
           <Route exact path="/home" component={Header}/>
           <Route exact path="/users" render={() => <ItemList users={this.props.users} loading={this.props.loading} refresh={this.refreshUsers} layout={this.state.layout} layoutHandler={this.layoutHandler} />}/>
-          <Route path="/create" component={NewItem}/>
-          <Route path="/404" component={p404}/>
+          <Route exact path="/create" component={NewItem}/>
+          <Route exact path="/404" component={p404}/>
 
-          <Redirect from="/" to="/home"/>
           <Redirect from="*" to="/404"/>
         </Switch>
       </div>
