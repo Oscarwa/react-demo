@@ -12,12 +12,12 @@ export default class Nav extends Component {
             Home
           </Menu.Item>
         </Link>
-        <Link to="/list">
+        <Link to="/users">
           <Menu.Item header>
             List
           </Menu.Item>
         </Link>
-        <Link to="/new">
+        <Link to="/create">
           <Menu.Item header>
             New
           </Menu.Item>

@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Header, Grid, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import Axios from 'axios';
+import { postUser } from '../actions/actionCreators';
 
 class NewItem extends Component {
 
+  static propTypes = {
+		postUsers: PropTypes.func
+	}
+
   state = {
     name: '',
-    email: '',
-    website: '',
+    age: '',
+    role: '',
     loading: false,
     errors: [],
   }
@@ -16,17 +21,16 @@ class NewItem extends Component {
   handleSubmit = (event) => {
     const newItem = {
       name: this.state.name,
-      email: this.state.email,
-      website: this.state.website,
+      age: this.state.age,
+      role: this.state.role,
     }
     
     if(this.validateReq(newItem)) {
       this.setState({loading: true})
-      Axios.post(`https://jsonplaceholder.typicode.com/users`, newItem)
-        .then(res => {
-          this.setState({name: '', email: '', website: '', loading: false});
-          
-        })
+      this.props.postUser(newItem);
+      setTimeout(() => {
+        this.props.history.push('/users');
+      }, 500);
     }
   }
 
@@ -35,11 +39,14 @@ class NewItem extends Component {
     if (item.name.trim() === '') {
       errors.push("Name cannot be blank");
     }
-    if (item.email.trim() === '') {
-      errors.push("Email cannot be blank");
+    if (item.age.trim() === '') {
+      errors.push("Age cannot be blank");
     }
-    if (item.website.trim() === '') {
-      errors.push("Website cannot be blank");
+    else if (isNaN(parseInt(item.age))) {
+      errors.push("Age must be a number");
+    }
+    if (item.role.trim() === '') {
+      errors.push("Role cannot be blank");
     }
     this.setState({errors});
     return errors.length === 0;
@@ -65,11 +72,11 @@ class NewItem extends Component {
                 <div className="ui red left pointing basic label hidden">That name is taken!</div>
               </Form.Field>
               <Form.Field>
-                <input type="text" name="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
+                <input type="text" name="age" placeholder="Age" value={this.state.age} onChange={this.handleChange} />
                 <div className="ui red left pointing basic label hidden">That name is taken!</div>
               </Form.Field>
               <Form.Field>
-                <input type="text" name="website" placeholder="Website" value={this.state.website} onChange={this.handleChange} />
+                <input type="text" name="role" placeholder="Role" value={this.state.role} onChange={this.handleChange} />
                 <div className="ui red left pointing basic label hidden">That name is taken!</div>
               </Form.Field>
               <Form.Button loading={this.state.loading} type='submit'>Save</Form.Button>
@@ -89,4 +96,12 @@ class NewItem extends Component {
   }
 }
 
-export default connect(null, null)(NewItem)
+const mapDispatchToProps = dispatch => {
+	return {
+			postUser: (newUser) => {
+					dispatch(postUser(newUser))
+			}
+	}
+}
+
+export default connect(null, mapDispatchToProps)(NewItem)

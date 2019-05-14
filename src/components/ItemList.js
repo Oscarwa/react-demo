@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Item from './Item';
 import ItemTable from './ItemTable';
 import LayoutSelector from './LayoutSelector';
@@ -7,25 +6,21 @@ import { Table, Card } from 'semantic-ui-react';
 import ConfirmModal from './ConfirmModal';
 
 
-class ItemList extends React.Component {
-    state = {
-        layout: 'grid',
-    }
-    
+class ItemList extends React.Component {    
 
-    clickEvent = (string) => {
-        this.setState({layout: string});
+    clickEvent = (value) => {
+        this.props.layoutHandler(value);
     }
 
     render() {
         let layout;
-        if(this.state.layout === 'grid') {
+        if(this.props.layout === 'grid') {
             layout = (
                 <Card.Group doubling itemsPerRow={4} stackable>
                     {this.props.users.map(i => <Item key={i.id} item={i} loading={this.props.loading}></Item>)}
                 </Card.Group>
             );
-        } else if (this.state.layout === 'table') {
+        } else if (this.props.layout === 'table') {
             layout = (
                 <Table celled>
                     <Table.Header>
@@ -45,7 +40,7 @@ class ItemList extends React.Component {
         }
         return (
             <React.Fragment>
-                <LayoutSelector setLayout={this.clickEvent} current={this.state.layout} />
+                <LayoutSelector setLayout={this.clickEvent} current={this.props.layout} />
                 
                 {layout}
 
@@ -55,8 +50,4 @@ class ItemList extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-	layout: state.mainReducer.layout
-})
-
-export default connect(mapStateToProps, null)(ItemList)
+export default ItemList

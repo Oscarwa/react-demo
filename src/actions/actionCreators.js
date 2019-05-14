@@ -12,6 +12,17 @@ export function getUsers() {
             })
     }
 }
+export function postUser(user) {
+    return dispatch => {
+        API.post('/users', user)
+            .then(res => {
+                dispatch({
+                    type: actionTypes.POST_USER,
+                    payload: res
+                })
+            })
+    }
+}
 export function deleteUser(id) {
     return dispatch => {
         API.delete('/users')

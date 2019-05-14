@@ -16,6 +16,13 @@ import { getUsers } from '../actions/actionCreators';
 		getUsers: PropTypes.func
 	}
 
+  state = {
+    layout: 'grid',
+  }
+  layoutHandler = (string) => {
+    this.setState({layout: string});
+  }
+
 	static defaultProps = {
 		users: []
 	}
@@ -28,12 +35,13 @@ import { getUsers } from '../actions/actionCreators';
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Header}/>
-          <Route exact path="/list" render={() => <ItemList users={this.props.users} loading={this.props.loading} layout='grid' />}/>
-          <Route path="/new" component={NewItem}/>
-          <Route component={p404}/>
+          <Route exact path="/home" component={Header}/>
+          <Route exact path="/users" render={() => <ItemList users={this.props.users} loading={this.props.loading} layout={this.state.layout} layoutHandler={this.layoutHandler} />}/>
+          <Route path="/create" component={NewItem}/>
+          <Route path="/404" component={p404}/>
 
-          <Redirect from="*" to={p404}/>
+          <Redirect from="/" to="/home"/>
+          <Redirect from="*" to="/404"/>
         </Switch>
       </div>
     )

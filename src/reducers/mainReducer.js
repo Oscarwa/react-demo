@@ -1,7 +1,7 @@
 import { actionTypes } from '../actions'
 
 const InitialState = {
-    users: [{},{},{},{}],
+    users: [{id:1},{id:2},{id:3},{id:4}],
     loading: true,
     layout: 'grid'
 }

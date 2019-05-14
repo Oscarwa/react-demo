@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, Image, Icon, Button, Placeholder } from 'semantic-ui-react';
 
@@ -6,9 +7,12 @@ import { uiConfirmOpen } from '../actions/actionUI'
 
 class Item extends Component {
 
+    static propTypes = {
+        uiConfirmOpen: PropTypes.func,
+    }
+
     deleteUserHandler = () => {
         this.props.uiConfirmOpen(this.props.item)
-        //this.props.deleteUser(this.props.item.id)
     }
 
     render() {
